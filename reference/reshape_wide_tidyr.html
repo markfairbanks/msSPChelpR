@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">msSPChelpR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.8.7.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.9.0.9000</span>
       </span>
     </div>
 
@@ -63,48 +63,59 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">reshape_wide_tidyr</span><span class="op">(</span>
-  <span class="va">df</span>,
-  <span class="va">case_id_var</span>,
-  <span class="va">time_id_var</span>,
-  timevar_max <span class="op">=</span> <span class="fl">6</span>,
-  datsize <span class="op">=</span> <span class="cn">Inf</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">reshape_wide_tidyr</span><span class="op">(</span></span>
+<span>  <span class="va">df</span>,</span>
+<span>  <span class="va">case_id_var</span>,</span>
+<span>  <span class="va">time_id_var</span>,</span>
+<span>  timevar_max <span class="op">=</span> <span class="fl">6</span>,</span>
+<span>  datsize <span class="op">=</span> <span class="cn">Inf</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>df</dt>
 <dd><p>dataframe</p></dd>
+
+
 <dt>case_id_var</dt>
 <dd><p>String with name of ID variable indicating same patient.
 E.g. <code>idvar="PUBCSNUM"</code> for SEER data.</p></dd>
+
+
 <dt>time_id_var</dt>
 <dd><p>String with name of variable that indicates diagnosis per patient.
 E.g. <code>timevar="SEQ_NUM"</code> for SEER data.</p></dd>
+
+
 <dt>timevar_max</dt>
 <dd><p>Numeric; default 6. Maximum number of cases per id.
 All tumors &gt; timevar_max will be deleted before reshaping.</p></dd>
+
+
 <dt>datsize</dt>
 <dd><p>Number of rows to be taken from df. This parameter is mainly for testing. Default is Inf so that df is fully processed.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>df</p>
+    
+
+<p>df</p>
     </div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">us_second_cancer</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="fu">msSPChelpR</span><span class="fu">::</span><span class="fu">reshape_wide_tidyr</span><span class="op">(</span><span class="va">us_second_cancer</span>,</span>
-<span class="r-in">                         case_id_var <span class="op">=</span> <span class="st">"fake_id"</span>, </span>
-<span class="r-in">                         time_id_var <span class="op">=</span> <span class="st">"SEQ_NUM"</span>, </span>
-<span class="r-in">                         timevar_max <span class="op">=</span> <span class="fl">2</span>,</span>
-<span class="r-in">                         datsize <span class="op">=</span> <span class="fl">10000</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">us_second_cancer</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu">msSPChelpR</span><span class="fu">::</span><span class="fu">reshape_wide_tidyr</span><span class="op">(</span><span class="va">us_second_cancer</span>,</span></span>
+<span class="r-in"><span>                         case_id_var <span class="op">=</span> <span class="st">"fake_id"</span>, </span></span>
+<span class="r-in"><span>                         time_id_var <span class="op">=</span> <span class="st">"SEQ_NUM"</span>, </span></span>
+<span class="r-in"><span>                         timevar_max <span class="op">=</span> <span class="fl">2</span>,</span></span>
+<span class="r-in"><span>                         datsize <span class="op">=</span> <span class="fl">10000</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Long dataset had too many cases per patient. Wide dataset is limited to  2  cases per id as defined in timevar_max option.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 6,003 × 27</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 6,003 × 29</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    fake_id registry.1 sex.1 race.1 datebirth.1 t_datediag.1 t_site_icd.1 t_dco.1</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> 100004  SEER Reg … Male  White  1926-01-01  1992-07-15   C50          histol…</span>
@@ -117,13 +128,14 @@ All tumors &gt; timevar_max will be deleted before reshaping.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> 100060  SEER Reg … Fema… White  1947-01-01  2003-08-15   C50          histol…</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> 100063  SEER Reg … Fema… Black  1938-01-01  1995-12-15   C50          histol…</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> 100073  SEER Reg … Male  White  1960-01-01  1993-11-15   C44          histol…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 5,993 more rows, and 19 more variables: fc_age.1 &lt;int&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   datedeath.1 &lt;date&gt;, p_alive.1 &lt;chr&gt;, p_dodmin.1 &lt;date&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   fc_agegroup.1 &lt;chr&gt;, t_yeardiag.1 &lt;chr&gt;, registry.2 &lt;chr&gt;, sex.2 &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   race.2 &lt;chr&gt;, datebirth.2 &lt;date&gt;, t_datediag.2 &lt;date&gt;, t_site_icd.2 &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   t_dco.2 &lt;chr&gt;, fc_age.2 &lt;int&gt;, datedeath.2 &lt;date&gt;, p_alive.2 &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 5,993 more rows</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 21 more variables: t_hist.1 &lt;int&gt;, fc_age.1 &lt;int&gt;, datedeath.1 &lt;date&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   p_alive.1 &lt;chr&gt;, p_dodmin.1 &lt;date&gt;, fc_agegroup.1 &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   t_yeardiag.1 &lt;chr&gt;, registry.2 &lt;chr&gt;, sex.2 &lt;chr&gt;, race.2 &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   datebirth.2 &lt;date&gt;, t_datediag.2 &lt;date&gt;, t_site_icd.2 &lt;chr&gt;, t_dco.2 &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   t_hist.2 &lt;int&gt;, fc_age.2 &lt;int&gt;, datedeath.2 &lt;date&gt;, p_alive.2 &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   p_dodmin.2 &lt;date&gt;, fc_agegroup.2 &lt;chr&gt;, t_yeardiag.2 &lt;chr&gt;</span></span>
-<span class="r-in"></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -138,7 +150,7 @@ All tumors &gt; timevar_max will be deleted before reshaping.</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>
